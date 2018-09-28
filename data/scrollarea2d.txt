@@ -1,0 +1,88 @@
+{
+        "chart": {
+            "theme": "ocean",
+            "caption": "Sales Trends",
+            "subCaption": "(2016 to 2017)",
+            "xAxisname": "Month",
+            "pYAxisName": "Amount",
+            "labelDisplay": "AUTO",
+            "sYAxisName": "Employees",
+            "numberPrefix": "$",
+            "numVisiblePlot": "20",
+            "flatScrollBars": "1",
+            "scrollheight": "1",
+            "showvalues": "0",
+            "bgColor": "#FFFFFF",
+            "borderColor": "#666666",
+            "borderThickness": "1",
+            "borderAlpha": "80",
+            "showBorder": "1",
+            "canvasbgAlpha": "100",
+            "divLineDashed": "0",
+            "divLineAlpha": "30",
+        },
+
+        "categories": [
+            {
+                "category": [
+                    {
+                        "label": "Jan 2016"
+                    },
+                    {
+                        "label": "Feb 2016"
+                    },
+                    {
+                        "label": "Mar 2016"
+                    },
+                    {
+                        "label": "Apr 2016"
+                    },
+                    {
+                        "label": "May 2016"
+                    }
+                ]
+            }
+        ],
+        "dataset": [
+            {
+                "seriesname": "Food Products",
+                "data": [
+                    {
+                        "value": "27400"
+                    },
+                    {
+                        "value": "29800"
+                    },
+                    {
+                        "value": "25800"
+                    },
+                    {
+                        "value": "26800"
+                    },
+                    {
+                        "value": "29600"
+                    }
+                ]
+            },
+            {
+                "seriesname": "Non-Food Products",
+                "data": [
+                    {
+                        "value": "30000"
+                    },
+                    {
+                        "value": "40000"
+                    },
+                    {
+                        "value": "30000"
+                    },
+                    {
+                        "value": "28000"
+                    },
+                    {
+                        "value": "31000"
+                    }
+                ]
+            }
+        ]
+    }
