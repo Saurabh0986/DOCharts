@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ViewBase, ScrollView, TouchableHighlight } from 'react-native';
 import DoChartBase from '../DOChartBase.js'
 //import { forEach } from '../../../../../../../../Library/Caches/typescript/2.6/node_modules/@types/async';
-import RNTooltips from 'react-native-tooltips';
 
    
-export default class DOBarChartTooltip extends Component {
+export default class DOHorizontalBarChartTooltip extends Component {
 
     constructor(props){
         super(props);

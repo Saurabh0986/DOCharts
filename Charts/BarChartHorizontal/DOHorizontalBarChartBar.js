@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ViewBase, TouchableHighlight } from 'react-native';
-import BarChartContainer from '../../BarChartContainer';
 
 
    
-export default class DOBarChartBar extends Component {
+export default class DOHorizontalBarChartBar extends Component {
 
     constructor(props){
         super(props);
@@ -50,9 +49,10 @@ export default class DOBarChartBar extends Component {
         return 0;
     }
 
-    onBarPress = () => {
+
+    onBarPress(env){
         if(this.state.ChartData != null){
-            this.state.ShowToolTip(this.state.ChartData.categoryIndex, this.state.ChartData.dataIndex, this.getBarHeight());
+            this.state.ShowToolTip(this.state.ChartData.categoryIndex, this.state.ChartData.dataIndex, env.nativeEvent.locationX);
         }
     }
 
@@ -64,21 +64,23 @@ export default class DOBarChartBar extends Component {
         var heightInternal = 0;
         var widthInternal = 0;
         var topLabel= "";
-        var topLabelColor = "#000000";
-        var barHeight = 0;
-        var barColorTop = "#111";
-        var barColorBottom = "#111";
+        var rightLabelColor = "#000000";
+        var dataRatio = 0;
+        var barColorLeft = "#111";
+        var barColorRight = "#111";
+        var margin = 0;
         if(this.state.ChartData != null){
             //Another way of saying that parent states are initiallized.
             color = this.state.BackGroundColor;
             heightInternal = this.state.ChartData.height;
             widthInternal = this.state.ChartData.width;
             topLabel = this.state.ChartData.label;
-            barHeight = this.state.ChartData.dataHeight;
+            dataRatio = this.state.ChartData.dataRatio;
 
-            topLabelColor = this.state.StyleData.topLabelColor;
-            barColorTop = this.state.StyleData.barColorTop;
-            barColorBottom = this.state.StyleData.barColorBottom;           
+            rightLabelColor = this.state.StyleData.rightLabelColor;
+            barColorLeft = this.state.ChartData.barColorLeft;
+            barColorRight = this.state.ChartData.barColorRight;           
+            margin = this.state.StyleData.margin;
             //Lets draw bars...
         }
 
@@ -86,30 +88,18 @@ export default class DOBarChartBar extends Component {
 
         var LabelStyle = {
             width: '100%', 
-            height: this.state.labelHeight,
-            color: topLabelColor,
-            top: 0,
-            textAlign: 'center',
-            fontSize: 10
-        };
-        var barContainerHeight = (heightInternal-this.state.labelHeight);
-        var BarContainerStyle = {
-            width: 10, 
-            height: (barContainerHeight*barHeight),
-            top:0,
-            backgroundColor:barColorTop
+            color: rightLabelColor,
+            textAlign: 'right',
+            fontSize: 10,
         };
 
         //this render will be overrided...
         return (
-            <View style={{backgroundColor:color, borderColor:"#111", width:widthInternal, height:heightInternal, alignItems: 'center' , justifyContent: 'center' }}>
+            <View style={{backgroundColor:color, width:widthInternal, height:heightInternal, /*alignItems: 'center' , */justifyContent: 'center' }}>
                 
-                <Text style={LabelStyle}>{topLabel}</Text>
-                <View style={{ width:'100%', height:barContainerHeight*(1-barHeight), bottom:0, backgroundColor:"fff", top:0 }} />
-                {/*Shift the above View up if you want to attach the percent label just above bar.*/}
-                <TouchableHighlight onPress={this.onBarPress}>
-                <View style={BarContainerStyle}>
-                
+                <TouchableHighlight onPress={(evt) => this.onBarPress(evt)}>
+                <View style={{ backgroundColor:barColorLeft, height:(heightInternal-2*margin), width:(widthInternal*dataRatio), justifyContent: 'center' }} >
+                    <Text style={LabelStyle}>{topLabel}</Text>
                 </View>
                 </TouchableHighlight>
            </View>

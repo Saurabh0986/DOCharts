@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ViewBase } from 'react-native';
 import BarChartContainer from '../../BarChartContainer';
-import DOBarChartBar from './DOBarChartBar.js'
+import DOHorizontalBarChartBar from './DOHorizontalBarChartBar.js'
 
 
    
@@ -43,6 +43,7 @@ export default class DOHorizontalBarChartCategory extends Component {
         var heightInternal = 0;
         var widthInternal = 0;
         var label= "";
+        var labelAtRight= "";
         var labelColor = "#000000";
         
         let labelHeight = 15;
@@ -53,54 +54,44 @@ export default class DOHorizontalBarChartCategory extends Component {
             heightInternal = this.state.ChartData.height;
             widthInternal = this.state.ChartData.width;
             label = this.state.ChartData.label;
+            labelAtRight = this.state.ChartData.labelAtRight;
             labelColor = this.state.ChartData.categoryLabelColor;
             labelHeight = this.state.ChartData.labelHeight;
 
             var bars = this.state.ChartData.data.map((a,j) => {
 
                 var margin = this.state.ChartData.style[j].margin;
-                var barWidth = this.state.ChartData.style[j].barWidth;
+                var barHeight = this.state.ChartData.style[j].barHeight;
 
                 var dataForBar = {
                     //"width" : (widthInternal / this.state.ChartData.data.length), //Actual Width of bar With gap....
-                    "width" : ((margin * 2) + barWidth)*1,
-                    "height": (heightInternal - labelHeight), //Actual Height of bar....
-                    "dataHeight": (a.data.value / a.maxValue),
+                    "height" : ((margin * 2) + barHeight),
+                    "width": (widthInternal), //Actual Height of bar....
+                    "dataRatio": (a.data.value / a.maxValue),
+                    "barColorLeft": a.data.barColorLeft,
+                    "barColorRight": a.data.barColorRight,
                     "label": a.data.topSummary,     
                     "categoryIndex": this.state.ChartData.categoryIndex,
                     "dataIndex": j,
                 }
 
-                return <DOBarChartBar data={dataForBar} bgColor="#fff" style={this.state.ChartData.style[j]} showToolTip={this.state.ShowToolTip} />
+                return <DOHorizontalBarChartBar data={dataForBar} bgColor="#fff" style={this.state.ChartData.style[j]} showToolTip={this.state.ShowToolTip} />
             })
             
-            barTag = <View style={{flexDirection:'row'}}>{bars}</View>
+            barTag = <View>{bars}</View>
             //Lets draw bars...
         }
 
-
-
-        var LabelStyle = {
-            width: '100%', 
-            height: labelHeight, 
-            position: 'absolute',
-            color: labelColor,
-            bottom: 0,
-            textAlign: 'center',
-            container:{justifyContent: 'center', alignItems: 'center'}
-        };
-        var BarContainerStyle = {
-            width: 10, 
-            height: 10,
-        };
-
-
         //this render will be overrided...
         return (
-            <View style={{backgroundColor:color, borderColor:"#111", borderWidth:2, width:widthInternal, height:heightInternal, alignItems: 'center' }}>
-            <Text style={LabelStyle}>{label}</Text>
-            {barTag}
-            
+            <View style={{backgroundColor:color, width:widthInternal, height:heightInternal, alignItems: 'center' }}>
+                <View style={{ height:labelHeight, width:'100%', flexDirection: 'row'}}>
+                    <Text style={{alignSelf:'center'}}>{label}</Text>
+                    <Text style={{marginLeft: 'auto', alignSelf:'center'}} >{labelAtRight}</Text>
+                </View>
+                <View style={{height:(heightInternal - labelHeight), width:'100%'}}>
+                    {barTag}
+                </View>
             </View>
         );
     }

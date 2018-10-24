@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, ViewBase, ScrollView } from 'react-native';
 import DoChartBase from '../DOChartBase.js'
 //import { forEach } from '../../../../../../../../Library/Caches/typescript/2.6/node_modules/@types/async';
 import DOHorizontalBarChartCategory from './DOHorizontalBarChartCategory.js'
-import RNTooltips from 'react-native-tooltips';
-import DOBarChartTooltip from './DOBarChartTooltip';
+import DOHorizontalBarChartTooltip from './DOHorizontalBarChartTooltip.js';
 
    
 export default class DOHorizontalBarChart extends DoChartBase {
@@ -17,7 +16,7 @@ export default class DOHorizontalBarChart extends DoChartBase {
             toolTipVisible:false,
             toolTipIndexOfCategory:-1,
             toolTipIndexOfData:-1,
-            toolTipPointY:0,
+            toolTipPointX:0,
             toolTipTarget:this
         };
 
@@ -72,12 +71,12 @@ export default class DOHorizontalBarChart extends DoChartBase {
         });
     }
 
-    showToolTip ( indexOfCategory, indexOfData, pointY ) {
+    showToolTip ( indexOfCategory, indexOfData, pointX ) {
         this.setState({
             toolTipVisible: true,
             toolTipIndexOfCategory: indexOfCategory,
             toolTipIndexOfData: indexOfData,
-            toolTipPointY:pointY
+            toolTipPointX:pointX
         });
     }
 
@@ -167,16 +166,18 @@ export default class DOHorizontalBarChart extends DoChartBase {
 
                     let style = this.state.ChartData.style[this.state.toolTipIndexOfData].data[categoryIndex];
 
-                    pointX = (widthOfCategory * (this.state.toolTipIndexOfCategory)) + ((style.margin)*2 + style.barWidth)*(this.state.toolTipIndexOfData+1);
-                    pointY = this.state.toolTipPointY + categoryLabelHeight;
+                    // pointX = (widthOfCategory * (this.state.toolTipIndexOfCategory)) + ((style.margin)*2 + style.barWidth)*(this.state.toolTipIndexOfData+1);
+                    // pointY = this.state.toolTipPointY + categoryLabelHeight;
+                    pointY = (heightOfCategory * (this.state.toolTipIndexOfCategory)) + ((style.margin)*2 + style.barHeight)*(this.state.toolTipIndexOfData+0.5);
+                    pointX = this.state.toolTipPointX;
                 }
 
-                toolTipData = this.createToolTipData( Arr.length * widthOfCategory, heightOfCategory,
+                toolTipData = this.createToolTipData( widthOfCategory, Arr.length * heightOfCategory,
                     titleText, descriptionText,
                      pointX, pointY,
                    100, 50 );
 
-                toolTipView = <DOBarChartTooltip data={toolTipData} toolTipAction={this.toolTipAction} />
+                toolTipView = <DOHorizontalBarChartTooltip data={toolTipData} toolTipAction={this.toolTipAction} />
             }
 
         }
