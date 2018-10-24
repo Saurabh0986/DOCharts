@@ -40,42 +40,59 @@ export default class BarChartContainer extends Component {
                 "flatScrollBars": "1",
                 "scrollShowButtons": "0",
                 "scrollColor": "#cccccc",
-                "theme": "fusion"
+                "theme": "fusion",
+
+                "TopHeadingVisible": true,
+                "TopHeadingHeight": 50,
+                "LeftTopHeading": "Assets",
+                "RightTopHeading": "Total",
+
+
             },
             "categories": [
                 {
                     "category": [
                         {
-                            "label": "Jan 2012"
+                            "label": "Jan 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Feb 2012"
+                            "label": "Feb 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Mar 2012"
+                            "label": "Mar 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Apr 2012"
+                            "label": "Apr 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "May 2012"
+                            "label": "May 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Jan 2012"
+                            "label": "Jan 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Feb 2012"
+                            "label": "Feb 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Mar 2012"
+                            "label": "Mar 2012",
+                            "desc": "27400",
                         },
                         {
-                            "label": "Apr 2012"
+                            "label": "Apr 2012",
+                            "desc": "27400",
                         },
                     ],
                     "categoryLabelColor": "#555555",
-                    "categoryWidth": "65",
-                    "categoryLabelHeight":40
+                    "categoryHeight": 65,
+                    "categoryLabelVisible":true,
+                    "categoryLabelHeight": 15,
                 }
             ],
             "dataset": [
@@ -83,39 +100,57 @@ export default class BarChartContainer extends Component {
                     "data": [
                         {
                             "value": "27400",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "29800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "25800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "26800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "29600",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "27400",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "29800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "25800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                         {
                             "value": "26800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#487591",
+                            "barColorRight": "#0D3E61",
                         },
                     ],
                     "maxValue": "30000",
@@ -124,39 +159,57 @@ export default class BarChartContainer extends Component {
                     "data": [
                         {
                             "value": "17400",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "19800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "15800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "16800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "19600",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "27400",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "29800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "25800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                         {
                             "value": "26800",
-                            "topSummary": "9.2%"
+                            "topSummary": "9.2%",
+                            "barColorLeft": "#ee7591",
+                            "barColorRight": "#443E61",
                         },
                     ],
                     "maxValue": "40000",
@@ -166,9 +219,7 @@ export default class BarChartContainer extends Component {
                 {
                     "data": [
                         {
-                            "barColorTop": "#487591",
-                            "barColorBottom": "#0D3E61",
-                            "topLabelColor": "#111111",
+                            "rightLabelColor": "#111111",
                             "margin":5,
                             "barWidth":10,
                         }
@@ -177,9 +228,7 @@ export default class BarChartContainer extends Component {
                 {
                     "data": [
                         {
-                            "barColorTop": "#f442d4",
-                            "barColorBottom": "#992a82",
-                            "topLabelColor": "#111111",
+                            "rightLabelColor": "#111111",
                             "margin":5,
                             "barWidth":10,
                         }
@@ -198,7 +247,7 @@ export default class BarChartContainer extends Component {
         return (
         <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
           <Text>Bar Chart Container</Text>
-          <DOChart type="BarChart" width="350" height="200" data={ json }/>
+          <DOChart type="HorizontalBarChart" width="350" height="500" data={ json }/>
         </View>
       );
     }

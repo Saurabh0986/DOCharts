@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ViewBase, ScrollView } from 'react-native';
 import DoChartBase from '../DOChartBase.js'
 //import { forEach } from '../../../../../../../../Library/Caches/typescript/2.6/node_modules/@types/async';
-import DOBarChartCategory from './DOBarChartCategory.js'
+import DOHorizontalBarChartCategory from './DOHorizontalBarChartCategory.js'
 import RNTooltips from 'react-native-tooltips';
 import DOBarChartTooltip from './DOBarChartTooltip';
 
    
-export default class DOBarChart extends DoChartBase {
+export default class DOHorizontalBarChart extends DoChartBase {
 
     constructor(props){
         super(props);
@@ -45,26 +45,6 @@ export default class DOBarChart extends DoChartBase {
         // your condition if you want to re-render every time on props change
         return super.shouldComponentUpdate(nextProps, nextState);
     }
-
-    // createBar() {
-    //     return (<View style={{ height:'100', width:'10', backgroundColor:'red'  }}>
-    //     </View>)
-    // }
-    
-    // createBars () {
-    //     return this.state.ChartData.categories.forEach(element => {
-    //         return (
-    //             {createBar}
-    //           )
-    //     });
-    //   }
-    
-    // showToolTip(e) {
-    //     e.preventDefault()
-    //     this.setState({
-    //       //someVar: someValue
-    //     })
-    // }
 
     toolTipAction() {
         this.setState({
@@ -111,27 +91,37 @@ export default class DOBarChart extends DoChartBase {
 
         var toolTipData = null;
         var toolTipView = <View/>
+        var topHeading = <View/>
         if(this.state.BackGroundColor != null){
             //Another way of saying that parent states are initiallized.
             color = this.state.BackGroundColor;
 
-            var chartTag = <View></View> 
-
-            //Lets draw bars...
-
             heightInternal = (parseInt(this.state.ChartHeight, 10) + 1);
             widthInternal = (parseInt(this.state.ChartWidth, 10) + 1);
 
-            // var widthOfCategory = (widthInternal/this.state.ChartData.categories[0].category.length);
-            var widthOfCategory = this.state.ChartData.categories[0].categoryWidth*1;
-            var heightOfCategory = heightInternal;
+            var topHeadingHeight = 0;
+            if(this.state.ChartData.chart.TopHeadingVisible){
+                topHeadingHeight = this.state.ChartData.chart.TopHeadingHeight;
+                topHeading = <View style={{ width:widthInternal, height: topHeadingHeight, flexDirection: 'row', borderBottomColor:"#666", borderBottomWidth:1}}>
+                        <Text style={{alignSelf:'center'}}>{this.state.ChartData.chart.LeftTopHeading}</Text>
+                        <Text style={{marginLeft: 'auto', alignSelf:'center'}} >{this.state.ChartData.chart.RightTopHeading}</Text>
+                    </View>
+            }
 
-            var categoryLabelHeight = this.state.ChartData.categories[0].categoryLabelHeight;
+            heightInternal = heightInternal - topHeadingHeight;
+            var chartTag = <View></View>
+
+            //Lets draw categories...
+
+
+
+            var widthOfCategory = widthInternal
+            var heightOfCategory = this.state.ChartData.categories[0].categoryHeight;
 
             //Add for loop here if you want to support more than one catagories type....
             let categoryIndex = 0;
 
-            Arr = this.state.ChartData.categories[0].category.map((a, i) => {
+            Arr = this.state.ChartData.categories[categoryIndex].category.map((a, i) => {
 
                 var dataSetForCurrIndex = this.state.ChartData.dataset.map((a,j) => {
                     return {
@@ -148,8 +138,11 @@ export default class DOBarChart extends DoChartBase {
                     "height" : heightOfCategory,
                     "width" : widthOfCategory,
                     "label" : this.state.ChartData.categories[categoryIndex].category[i].label,
-                    "labelHeight" : categoryLabelHeight,
+                    "labelAtRight" : this.state.ChartData.categories[categoryIndex].category[i].desc,
+
+                    "labelHeight" : this.state.ChartData.categories[categoryIndex].categoryLabelHeight,
                     "categoryLabelColor" : this.state.ChartData.categories[categoryIndex].categoryLabelColor,
+                    
                     "data" : dataSetForCurrIndex,
                     "style" : styleForCurrIndex,
                     "categoryIndex" : i
@@ -157,7 +150,7 @@ export default class DOBarChart extends DoChartBase {
 
                 //return <View key={i} style={{ height:200,width: 20,borderBottomWidth:2, borderBottomColor: '#ededed', backgroundColor:'#333' }}><Text>{a.label} </Text></View>                            
                 //return <DOBarChartCategory style={{height:heightOfCategory, width:widthOfCategory}} data={categoryData} bgColor="#fff" />
-                return <DOBarChartCategory data={categoryData} bgColor="#fff" showToolTip={this.showToolTip} />
+                return <DOHorizontalBarChartCategory data={categoryData} bgColor="#fff" showToolTip={this.showToolTip} />
             });
 
             if(this.state.toolTipVisible){
@@ -191,8 +184,9 @@ export default class DOBarChart extends DoChartBase {
 
         return (
             
-            <View style={{ backgroundColor:color, flexDirection: 'row', height:heightInternal, width:widthInternal}} >
-                <ScrollView horizontal={true}>
+            <View style={{ backgroundColor:color,  height:heightInternal, width:widthInternal}} >
+                {topHeading}
+                <ScrollView horizontal={false}>
                     {Arr}
                     {toolTipView}
                 </ScrollView>

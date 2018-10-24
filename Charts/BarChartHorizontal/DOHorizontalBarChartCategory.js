@@ -5,7 +5,7 @@ import DOBarChartBar from './DOBarChartBar.js'
 
 
    
-export default class DOBarChartCategory extends Component {
+export default class DOHorizontalBarChartCategory extends Component {
 
     constructor(props){
         super(props);

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ViewBase } from 'react-native';
 import DOBarChart from './BarChart/DOBarChart.js'
+import DOAreaChart from './AreaChart/DOAreaChart.js'
+import DOHorizontalBarChart from './BarChartHorizontal/DOHorizontalBarChart.js'
 
 
 
@@ -58,7 +60,12 @@ export default class DOChart extends Component {
             //chartData = chartData.categories[0].category[0].label
             if(this.state.DOChartType === "BarChart"){
                 chartTag = <DOBarChart barGap="5" barWidth="10" width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="#fff" data={chartData}/>
-
+            }
+            else if(this.state.DOChartType === "AreaChart"){
+                chartTag = <DOAreaChart width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="#fff" data={chartData}/>
+            }
+            else if(this.state.DOChartType === "HorizontalBarChart"){
+                chartTag = <DOHorizontalBarChart barGap="5" barWidth="10" width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="#fff" data={chartData}/>
             }
         }
 
