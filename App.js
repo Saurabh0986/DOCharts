@@ -10,9 +10,9 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      // barChartContainer: <BarChartContainer/>,
-      // areaChartContainer: <AreaChartContainer/>,
-      horizontalBarChartContainer: <HorizontalBarChartContainer/>
+      //barChartContainer: <BarChartContainer/>,
+      areaChartContainer: <AreaChartContainer/>,
+      //horizontalBarChartContainer: <HorizontalBarChartContainer/>
 
     };
   }
@@ -23,7 +23,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.horizontalBarChartContainer}
+        <View style={{height:40, width:40}}/>
+        {this.state.areaChartContainer}
       </View>
     );
   }

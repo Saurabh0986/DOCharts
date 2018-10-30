@@ -47,6 +47,14 @@ export default class DOBarChartCategory extends Component {
         
         let labelHeight = 15;
         var barTag = <View></View> 
+
+        var xAxisThickness = 0;
+        var xAxisColor = "#00000000";
+        var categoryLabelFontSize = 15;
+
+        var categoryDividerColor = 'transparent';
+        var categoryDeviderThickness_Left = 0;
+        var categoryDeviderThickness_Right = 0;
         if(this.state.ChartData != null){
             //Another way of saying that parent states are initiallized.
             color = this.state.BackGroundColor;
@@ -55,6 +63,15 @@ export default class DOBarChartCategory extends Component {
             label = this.state.ChartData.label;
             labelColor = this.state.ChartData.categoryLabelColor;
             labelHeight = this.state.ChartData.labelHeight;
+            xAxisThickness = this.state.ChartData.xAxisThickness;
+            xAxisColor = this.state.ChartData.xAxisColor;
+            categoryLabelFontSize = this.state.ChartData.categoryLabelFontSize;
+            categoryDividerColor = this.state.ChartData.categoryDividerColor;
+            if(this.state.ChartData.categoryIndex == 0){
+                categoryDeviderThickness_Left = this.state.ChartData.categoryDeviderThickness;
+            }
+            categoryDeviderThickness_Right = this.state.ChartData.categoryDeviderThickness;
+
 
             var bars = this.state.ChartData.data.map((a,j) => {
 
@@ -68,10 +85,11 @@ export default class DOBarChartCategory extends Component {
                     "dataHeight": (a.data.value / a.maxValue),
                     "label": a.data.topSummary,     
                     "categoryIndex": this.state.ChartData.categoryIndex,
+                    "animateOnStateSet": this.state.ChartData.animateOnStateSet,
                     "dataIndex": j,
                 }
 
-                return <DOBarChartBar data={dataForBar} bgColor="#fff" style={this.state.ChartData.style[j]} showToolTip={this.state.ShowToolTip} />
+                return <DOBarChartBar data={dataForBar}  style={this.state.ChartData.style[j]} showToolTip={this.state.ShowToolTip} key={"bar"+j}/>
             })
             
             barTag = <View style={{flexDirection:'row'}}>{bars}</View>
@@ -81,13 +99,9 @@ export default class DOBarChartCategory extends Component {
 
 
         var LabelStyle = {
-            width: '100%', 
-            height: labelHeight, 
-            position: 'absolute',
             color: labelColor,
-            bottom: 0,
             textAlign: 'center',
-            container:{justifyContent: 'center', alignItems: 'center'}
+            fontSize: categoryLabelFontSize
         };
         var BarContainerStyle = {
             width: 10, 
@@ -97,10 +111,28 @@ export default class DOBarChartCategory extends Component {
 
         //this render will be overrided...
         return (
-            <View style={{backgroundColor:color, borderColor:"#111", borderWidth:2, width:widthInternal, height:heightInternal, alignItems: 'center' }}>
-            <Text style={LabelStyle}>{label}</Text>
+            <View style={{
+                backgroundColor:color, 
+                borderColor:categoryDividerColor,
+                borderLeftWidth:categoryDeviderThickness_Left, 
+                borderRightWidth:categoryDeviderThickness_Right, 
+                width:widthInternal, 
+                height:heightInternal, 
+                alignItems: 'center' }}
+                key={"outerView"}>
+
             {barTag}
-            
+            <View style={{
+                width: '100%', 
+                height: labelHeight, 
+
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderTopWidth:xAxisThickness,
+                borderTopColor:xAxisColor,
+            }} key={"textContainer"}>
+                <Text style={LabelStyle} key={"text"} >{label}</Text>
+            </View>
             </View>
         );
     }

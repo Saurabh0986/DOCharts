@@ -131,6 +131,9 @@ export default class DOBarChart extends DoChartBase {
             //Add for loop here if you want to support more than one catagories type....
             let categoryIndex = 0;
 
+            let animateChartOnStateSet = this.state.AnimateChartOnStateSet;
+            this.state.AnimateChartOnStateSet = false;
+
             Arr = this.state.ChartData.categories[0].category.map((a, i) => {
 
                 var dataSetForCurrIndex = this.state.ChartData.dataset.map((a,j) => {
@@ -149,15 +152,23 @@ export default class DOBarChart extends DoChartBase {
                     "width" : widthOfCategory,
                     "label" : this.state.ChartData.categories[categoryIndex].category[i].label,
                     "labelHeight" : categoryLabelHeight,
+                    "categoryLabelFontSize" : this.state.ChartData.categories[categoryIndex].categoryLabelFontSize,
                     "categoryLabelColor" : this.state.ChartData.categories[categoryIndex].categoryLabelColor,
+
+                    "categoryDividerColor" : this.state.ChartData.categories[categoryIndex].categoryDividerColor,
+                    "categoryDeviderThickness" : this.state.ChartData.categories[categoryIndex].categoryDeviderThickness,
+
                     "data" : dataSetForCurrIndex,
                     "style" : styleForCurrIndex,
+                    "xAxisThickness" : this.state.ChartData.categories[categoryIndex].xAxisThickness,
+                    "xAxisColor" : this.state.ChartData.categories[categoryIndex].xAxisColor,
+                    "animateOnStateSet" : animateChartOnStateSet,
                     "categoryIndex" : i
                 };
 
                 //return <View key={i} style={{ height:200,width: 20,borderBottomWidth:2, borderBottomColor: '#ededed', backgroundColor:'#333' }}><Text>{a.label} </Text></View>                            
                 //return <DOBarChartCategory style={{height:heightOfCategory, width:widthOfCategory}} data={categoryData} bgColor="#fff" />
-                return <DOBarChartCategory data={categoryData} bgColor="#fff" showToolTip={this.showToolTip} />
+                return <DOBarChartCategory data={categoryData} showToolTip={this.showToolTip} key={i} />
             });
 
             if(this.state.toolTipVisible){
@@ -183,7 +194,7 @@ export default class DOBarChart extends DoChartBase {
                      pointX, pointY,
                    100, 50 );
 
-                toolTipView = <DOBarChartTooltip data={toolTipData} toolTipAction={this.toolTipAction} />
+                toolTipView = <DOBarChartTooltip data={toolTipData} toolTipAction={this.toolTipAction} key="tooltip" />
             }
 
         }

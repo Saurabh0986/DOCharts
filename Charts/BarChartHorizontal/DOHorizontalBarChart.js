@@ -120,6 +120,9 @@ export default class DOHorizontalBarChart extends DoChartBase {
             //Add for loop here if you want to support more than one catagories type....
             let categoryIndex = 0;
 
+            let animateChartOnStateSet = this.state.AnimateChartOnStateSet;
+            this.state.AnimateChartOnStateSet = false;
+
             Arr = this.state.ChartData.categories[categoryIndex].category.map((a, i) => {
 
                 var dataSetForCurrIndex = this.state.ChartData.dataset.map((a,j) => {
@@ -144,12 +147,13 @@ export default class DOHorizontalBarChart extends DoChartBase {
                     
                     "data" : dataSetForCurrIndex,
                     "style" : styleForCurrIndex,
+                    "animateChartOnStateSet" : animateChartOnStateSet,
                     "categoryIndex" : i
                 };
 
                 //return <View key={i} style={{ height:200,width: 20,borderBottomWidth:2, borderBottomColor: '#ededed', backgroundColor:'#333' }}><Text>{a.label} </Text></View>                            
                 //return <DOBarChartCategory style={{height:heightOfCategory, width:widthOfCategory}} data={categoryData} bgColor="#fff" />
-                return <DOHorizontalBarChartCategory data={categoryData} bgColor="#fff" showToolTip={this.showToolTip} />
+                return <DOHorizontalBarChartCategory key={i} data={categoryData} showToolTip={this.showToolTip} />
             });
 
             if(this.state.toolTipVisible){
@@ -177,7 +181,7 @@ export default class DOHorizontalBarChart extends DoChartBase {
                      pointX, pointY,
                    100, 50 );
 
-                toolTipView = <DOHorizontalBarChartTooltip data={toolTipData} toolTipAction={this.toolTipAction} />
+                toolTipView = <DOHorizontalBarChartTooltip key="tooltip" data={toolTipData} toolTipAction={this.toolTipAction} />
             }
 
         }

@@ -151,7 +151,7 @@ export default class DOAreaChart extends DoChartBase {
                 widthOfXaxis = widthOfCategory * numberOfCategories;
             }
             
-            leftScaleView = AreaChartUtilities.leftScaleView(this.state.ChartData, heightOfLeftRangePannel, widthOfLeftRangePannel);
+            leftScaleView = AreaChartUtilities.leftScaleView(this.state.ChartData, heightOfLeftRangePannel, widthOfLeftRangePannel, this.state.ChartData.chart.backgroundColor);
             leftScaleShadowView = AreaChartUtilities.leftScaleShadowView(heightOfLeftRangePannel+heightOfXaxis, widthOfLeftRangePannel);
             backScaleView = AreaChartUtilities.backScaleView(this.state.ChartData, heightOfLeftRangePannel, widthOfScroll);
             legendsView = AreaChartUtilities.legendsView(this.state.ChartData, widthOfScroll, heightOfBottomLegendsPannel);
@@ -200,7 +200,7 @@ export default class DOAreaChart extends DoChartBase {
 
                 //return <View key={i} style={{ height:200,width: 20,borderBottomWidth:2, borderBottomColor: '#ededed', backgroundColor:'#333' }}><Text>{a.label} </Text></View>                            
                 //return <DOBarChartCategory style={{height:heightOfCategory, width:widthOfCategory}} data={categoryData} bgColor="#fff" />
-                return <DOAreaChartCategory data={categoryData} bgColor="#fff" showToolTip={this.showToolTip} />
+                return <DOAreaChartCategory key={i} data={categoryData} bgColor="#fff" showToolTip={this.showToolTip} />
             });
 
             if(this.state.toolTipVisible){
@@ -226,7 +226,7 @@ export default class DOAreaChart extends DoChartBase {
                         pointX, pointY,
                     100, 50 );
 
-                toolTipView = <DOAreaChartTooltip data={toolTipData} toolTipAction={this.toolTipAction} />
+                toolTipView = <DOAreaChartTooltip key="toolTip" data={toolTipData} toolTipAction={this.toolTipAction} />
             }
         }
 

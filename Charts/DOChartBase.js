@@ -11,7 +11,8 @@ export default class DOBarChart extends Component {
             BackGroundColor: "#fff",
             ChartData: "",
             ChartWidth: "0",
-            ChartHeight: "0"
+            ChartHeight: "0",
+            AnimateChartOnStateSet: false
         };
     }
     
@@ -20,7 +21,8 @@ export default class DOBarChart extends Component {
             BackGroundColor: this.props.bgColor,
             ChartData: this.props.data,
             ChartWidth: this.props.width,
-            ChartHeight: this.props.height
+            ChartHeight: this.props.height,
+            AnimateChartOnStateSet: this.props.animateOnStateSet,
         });
     }
     
@@ -30,6 +32,7 @@ export default class DOBarChart extends Component {
             ChartData: nextProps["data"],
             ChartWidth: nextProps["width"],
             ChartHeight: nextProps["height"],
+            AnimateChartOnStateSet: nextProps["animateOnStateSet"]
         });
     }
        

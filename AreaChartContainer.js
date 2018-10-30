@@ -15,33 +15,13 @@ export default class AreaChartContainer extends Component {
           dataFormat: 'json',
           dataSource: {
             "chart": {
-                "caption": "Sales Trends",
-                "showCaption": false,
-
-                "subcaption": "FY 2012 - FY 2013",
-                "showSubcaption": false,
-
-                "xaxisname": "Month",
-                "showXaxisname": false,
-                "showXaxis":false,
-
-                "yaxisname": "Revenue",
-                "showYaxisname": false,
-                "showYaxis":false,
-
-                "axisColor": "#cccccc",
                 
-                "showvalues": "1",
-                "numberprefix": "$",
-                "labeldisplay": "WRAP",
-                "linethickness": "3",
-                "numVisiblePlot": "12",
-                "scrollheight": "10",
-                "flatScrollBars": "1",
-                "scrollShowButtons": "0",
-                "scrollColor": "#cccccc",
-                "theme": "fusion",
-                ///Added by Saud....
+                "backgroundColor":"#eeeeee",
+                "borderThickness":1,
+                "borderColor":"#fff",
+                "shadowColor": "#000",  
+                "shadowOpacity":1,
+                "shadowRadius": 10,
 
                 "showLeftRangePannel":true,
                 "widthOfLeftRangePannel":80,
@@ -375,7 +355,7 @@ export default class AreaChartContainer extends Component {
 
         var json = this.state.dataSource
         return (
-        <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Text>Area Chart Container</Text>
           <DOChart type="AreaChart" width="350" height="400" data={ json }/>
         </View>

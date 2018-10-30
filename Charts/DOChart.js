@@ -15,7 +15,8 @@ export default class DOChart extends Component {
             DOChartType: "",
             DOChartWidth: "0",
             DOChartHeight: "0",
-            DOChartData: ""
+            DOChartData: "",
+            DOChartAnimateOnStateSet: false,
         };
     }
     
@@ -25,6 +26,7 @@ export default class DOChart extends Component {
             DOChartWidth: this.props.width,
             DOChartHeight: this.props.height,
             DOChartData: this.props.data,
+            DOChartAnimateOnStateSet: this.props.animateOnStateSet
         });
     }
     
@@ -34,6 +36,7 @@ export default class DOChart extends Component {
             DOChartWidth: nextProps["width"],
             DOChartHeight: nextProps["height"],
             DOChartData: nextProps["data"],
+            DOChartAnimateOnStateSet: nextProps["animateOnStateSet"]
         });
     }
        
@@ -44,28 +47,35 @@ export default class DOChart extends Component {
 
     render() {
 
-        console.log(this.state.DOChartData)
 
         var chartData = this.state.DOChartData
         var chartTag = <View></View>
+        var viewStyle = {}
         if( this.state.DOChartData === "")
         {
 
         } 
         else 
         {
-            //Data is initiallized....
 
-            console.log(chartData)
+            viewStyle ={
+                backgroundColor : chartData.chart.backgroundColor,
+                borderWidth : chartData.chart.borderThickness,
+                borderColor : chartData.chart.borderColor,
+                shadowColor : chartData.chart.shadowColor,  
+                shadowOpacity : chartData.chart.shadowOpacity,
+                shadowRadius : chartData.chart.shadowRadius,
+
+            }
             //chartData = chartData.categories[0].category[0].label
             if(this.state.DOChartType === "BarChart"){
-                chartTag = <DOBarChart barGap="5" barWidth="10" width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="#fff" data={chartData}/>
+                chartTag = <DOBarChart width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="transparent" data={chartData} animateOnStateSet={this.state.DOChartAnimateOnStateSet}/>
             }
             else if(this.state.DOChartType === "AreaChart"){
-                chartTag = <DOAreaChart width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="#fff" data={chartData}/>
+                chartTag = <DOAreaChart width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="transparent" data={chartData} animateOnStateSet={this.state.DOChartAnimateOnStateSet}/>
             }
             else if(this.state.DOChartType === "HorizontalBarChart"){
-                chartTag = <DOHorizontalBarChart barGap="5" barWidth="10" width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="#fff" data={chartData}/>
+                chartTag = <DOHorizontalBarChart width={this.state.DOChartWidth} height={this.state.DOChartHeight} bgColor="transparent" data={chartData} animateOnStateSet={this.state.DOChartAnimateOnStateSet}/>
             }
         }
 
@@ -74,8 +84,8 @@ export default class DOChart extends Component {
         
         
         return (
-            <View>
-            {chartTag}
+            <View style={viewStyle} >
+                {chartTag}
             </View>
         );
     }

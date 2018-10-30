@@ -15,32 +15,13 @@ export default class BarChartContainer extends Component {
           dataFormat: 'json',
           dataSource: {
             "chart": {
-                "caption": "Sales Trends",
-                "showCaption": false,
 
-                "subcaption": "FY 2012 - FY 2013",
-                "showSubcaption": false,
-
-                "xaxisname": "Month",
-                "showXaxisname": false,
-                "showXaxis":false,
-
-                "yaxisname": "Revenue",
-                "showYaxisname": false,
-                "showYaxis":false,
-
-                "axisColor": "#cccccc",
-                
-                "showvalues": "1",
-                "numberprefix": "$",
-                "labeldisplay": "WRAP",
-                "linethickness": "3",
-                "numVisiblePlot": "12",
-                "scrollheight": "10",
-                "flatScrollBars": "1",
-                "scrollShowButtons": "0",
-                "scrollColor": "#cccccc",
-                "theme": "fusion",
+                "backgroundColor":"#aaaaaa",
+                "borderThickness":1,
+                "borderColor":"#ffffff",
+                "shadowColor": "#000",  
+                "shadowOpacity":1,
+                "shadowRadius": 10,
 
                 "TopHeadingVisible": true,
                 "TopHeadingHeight": 50,
@@ -54,43 +35,43 @@ export default class BarChartContainer extends Component {
                     "category": [
                         {
                             "label": "Jan 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Feb 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Mar 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Apr 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "May 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Jan 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Feb 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Mar 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                         {
                             "label": "Apr 2012",
-                            "desc": "27400",
+                            "desc": "$27400",
                         },
                     ],
                     "categoryLabelColor": "#555555",
-                    "categoryHeight": 65,
+                    "categoryHeight": 85,
                     "categoryLabelVisible":true,
                     "categoryLabelHeight": 15,
                 }
@@ -221,7 +202,7 @@ export default class BarChartContainer extends Component {
                         {
                             "rightLabelColor": "#111111",
                             "margin":5,
-                            "barWidth":10,
+                            "barHeight":20,
                         }
                     ]
                 },
@@ -230,7 +211,7 @@ export default class BarChartContainer extends Component {
                         {
                             "rightLabelColor": "#111111",
                             "margin":5,
-                            "barWidth":10,
+                            "barHeight":20,
                         }
                     ]
                 }
@@ -245,9 +226,9 @@ export default class BarChartContainer extends Component {
 
         var json = this.state.dataSource
         return (
-        <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Text>Bar Chart Container</Text>
-          <DOChart type="HorizontalBarChart" width="350" height="500" data={ json }/>
+          <DOChart type="HorizontalBarChart" width="350" height="500" data={ json } animateOnStateSet={true}/>
         </View>
       );
     }

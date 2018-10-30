@@ -15,32 +15,12 @@ export default class BarChartContainer extends Component {
           dataFormat: 'json',
           dataSource: {
             "chart": {
-                "caption": "Sales Trends",
-                "showCaption": false,
-
-                "subcaption": "FY 2012 - FY 2013",
-                "showSubcaption": false,
-
-                "xaxisname": "Month",
-                "showXaxisname": false,
-                "showXaxis":false,
-
-                "yaxisname": "Revenue",
-                "showYaxisname": false,
-                "showYaxis":false,
-
-                "axisColor": "#cccccc",
-                
-                "showvalues": "1",
-                "numberprefix": "$",
-                "labeldisplay": "WRAP",
-                "linethickness": "3",
-                "numVisiblePlot": "12",
-                "scrollheight": "10",
-                "flatScrollBars": "1",
-                "scrollShowButtons": "0",
-                "scrollColor": "#cccccc",
-                "theme": "fusion"
+                "backgroundColor":"#f2f2f2",
+                "borderThickness":1,
+                "borderColor":"#ffffff",
+                "shadowColor": "#000",  
+                "shadowOpacity":1,
+                "shadowRadius": 10,
             },
             "categories": [
                 {
@@ -75,7 +55,13 @@ export default class BarChartContainer extends Component {
                     ],
                     "categoryLabelColor": "#555555",
                     "categoryWidth": "65",
-                    "categoryLabelHeight":40
+                    "categoryLabelHeight":40,
+                    "categoryLabelFontSize":10,
+                    "xAxisThickness":1,
+                    "xAxisColor":"#999999",
+
+                    "categoryDividerColor":"#999999",
+                    "categoryDeviderThickness":1,
                 }
             ],
             "dataset": [
@@ -169,6 +155,7 @@ export default class BarChartContainer extends Component {
                             "barColorTop": "#487591",
                             "barColorBottom": "#0D3E61",
                             "topLabelColor": "#111111",
+                            "topLabelFontSize": 6,
                             "margin":5,
                             "barWidth":10,
                         }
@@ -180,6 +167,7 @@ export default class BarChartContainer extends Component {
                             "barColorTop": "#f442d4",
                             "barColorBottom": "#992a82",
                             "topLabelColor": "#111111",
+                            "topLabelFontSize": 6,
                             "margin":5,
                             "barWidth":10,
                         }
@@ -196,9 +184,9 @@ export default class BarChartContainer extends Component {
 
         var json = this.state.dataSource
         return (
-        <View style={{ backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Text>Bar Chart Container</Text>
-          <DOChart type="BarChart" width="350" height="200" data={ json }/>
+          <DOChart type="BarChart" width="350" height="200" data={ json } animateOnStateSet={true}/>
         </View>
       );
     }

@@ -151,7 +151,7 @@ export default class DOAreaChartSubCategory extends Component {
 
                     this.state.minMaxPointsForData.push({"min":minTopSpace, "max":maxTopSpace})
 
-                    topCrown = <View pointerEvents="none"
+                    topCrown = <View pointerEvents="none" key={i}
                     style={{
                         left:0,
                         top:minTopSpace,
@@ -184,7 +184,7 @@ export default class DOAreaChartSubCategory extends Component {
 
                 return(
                     
-                    <View>
+                    <View key={i}>
                         {/* <View 
                         style={{
                             left:0,
@@ -208,7 +208,7 @@ export default class DOAreaChartSubCategory extends Component {
                         {/* </TouchableHighlight>
                         <TouchableHighlight key={i} onPress={this.onSubCategoryPress2.bind(this,{"dataNum":indexOfData, "max":max})} > */}
 
-                        <View pointerEvents="none"
+                        <View pointerEvents="none" 
                         style={{
                             left:0,
                             top:maxTopSpace,
@@ -216,7 +216,7 @@ export default class DOAreaChartSubCategory extends Component {
                             width:widthInternal,
                             height:(heightInternal - maxTopSpace),
                             backgroundColor: b.topColor,
-                        }} key={i}/>
+                        }} key={"bar"+i}/>
                         {/* </TouchableHighlight> */}
 
 
@@ -229,9 +229,9 @@ export default class DOAreaChartSubCategory extends Component {
 
         return (
             //underlayColor and activeOpacity is used to hide the highlights.... underlayColor="#00000000" activeOpacity={1}
-                <View style={{width:widthInternal, height:heightInternal}}>
+                <View style={{width:widthInternal, height:heightInternal}} key={"scOuter"}>
                 <TouchableHighlight onPress={(evt) => this.onSubCategoryPress(evt)}>
-                        <View style={{/*backgroundColor:"red",*/ top:0, left:0, width:widthInternal, height:heightInternal, position:'absolute'}}/>
+                        <View style={{/*backgroundColor:"red",*/ top:0, left:0, width:widthInternal, height:heightInternal, position:'absolute'}} key={"scInnert"}/>
                 </TouchableHighlight>
                     {views}
                     

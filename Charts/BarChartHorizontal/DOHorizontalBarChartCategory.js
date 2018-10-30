@@ -72,10 +72,11 @@ export default class DOHorizontalBarChartCategory extends Component {
                     "barColorRight": a.data.barColorRight,
                     "label": a.data.topSummary,     
                     "categoryIndex": this.state.ChartData.categoryIndex,
+                    "animateChartOnStateSet": this.state.ChartData.animateChartOnStateSet,
                     "dataIndex": j,
                 }
 
-                return <DOHorizontalBarChartBar data={dataForBar} bgColor="#fff" style={this.state.ChartData.style[j]} showToolTip={this.state.ShowToolTip} />
+                return <DOHorizontalBarChartBar key={j} data={dataForBar} bgColor="#00000000" style={this.state.ChartData.style[j]} showToolTip={this.state.ShowToolTip} />
             })
             
             barTag = <View>{bars}</View>

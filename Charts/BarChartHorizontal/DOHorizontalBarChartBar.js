@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ViewBase, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, ViewBase, TouchableHighlight, Animated } from 'react-native';
 
 
    
@@ -12,7 +12,8 @@ export default class DOHorizontalBarChartBar extends Component {
             ChartData: null,
             StyleData: null,
             ShowToolTip: null,
-            labelHeight: 15
+            labelHeight: 15,
+            barWidthAnim: new Animated.Value(0),
         };
     }
     
@@ -84,7 +85,20 @@ export default class DOHorizontalBarChartBar extends Component {
             //Lets draw bars...
         }
 
-        
+        let barWidthAnim = (widthInternal*dataRatio);
+        if(this.state.ChartData != null && this.state.ChartData.animateChartOnStateSet == true){
+            
+
+            Animated.timing(                    // Animate over time
+                this.state.barWidthAnim,       // The animated value to drive
+                {
+                  toValue: widthInternal*dataRatio,
+                  duration: 1000,              // Make it take a while
+                }
+              ).start();
+
+              barWidthAnim = this.state.barWidthAnim;
+        }
 
         var LabelStyle = {
             width: '100%', 
@@ -98,9 +112,9 @@ export default class DOHorizontalBarChartBar extends Component {
             <View style={{backgroundColor:color, width:widthInternal, height:heightInternal, /*alignItems: 'center' , */justifyContent: 'center' }}>
                 
                 <TouchableHighlight onPress={(evt) => this.onBarPress(evt)}>
-                <View style={{ backgroundColor:barColorLeft, height:(heightInternal-2*margin), width:(widthInternal*dataRatio), justifyContent: 'center' }} >
+                <Animated.View style={{ backgroundColor:barColorLeft, height:(heightInternal-2*margin), width:barWidthAnim, justifyContent: 'center' }} >
                     <Text style={LabelStyle}>{topLabel}</Text>
-                </View>
+                </Animated.View>
                 </TouchableHighlight>
            </View>
         );

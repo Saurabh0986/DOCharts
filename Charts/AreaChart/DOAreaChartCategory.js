@@ -93,6 +93,8 @@ export default class DOAreaChartCategory extends Component {
                                 "categoryIndex": this.state.ChartData.categoryIndex,
                                 "subCategoryIndex": j
                             }} 
+
+                            key={j}
                             bgColor="#fff" 
                             showToolTip={this.state.ShowToolTip} />
             })
@@ -110,7 +112,7 @@ export default class DOAreaChartCategory extends Component {
             color: labelColor,
             bottom: 0,
             textAlign: 'center',
-            container:{justifyContent: 'center', alignItems: 'center'}
+            
         };
         var BarContainerStyle = {
             width: 10, 
@@ -121,7 +123,7 @@ export default class DOAreaChartCategory extends Component {
         //this render will be overrided...
         return (
             <View style={{backgroundColor:'transparent', borderColor:"#999", borderWidth:0.5, width:widthInternal, height:heightInternal, alignItems: 'center' }}>
-                <Text style={LabelStyle}>{label}</Text>
+                <Text style={LabelStyle}  key={"categoryText"} >{label}</Text>
                 {barTag}
             </View>
         );

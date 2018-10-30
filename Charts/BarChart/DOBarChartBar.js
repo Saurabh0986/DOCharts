@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ViewBase, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, ViewBase, TouchableHighlight, Animated } from 'react-native';
 import BarChartContainer from '../../BarChartContainer';
 
 
@@ -13,7 +13,9 @@ export default class DOBarChartBar extends Component {
             ChartData: null,
             StyleData: null,
             ShowToolTip: null,
-            labelHeight: 15
+            labelHeight: 15,
+            barHeightAnim: new Animated.Value(0),
+            barGapHeightAnim: new Animated.Value(0)
         };
     }
     
@@ -68,6 +70,8 @@ export default class DOBarChartBar extends Component {
         var barHeight = 0;
         var barColorTop = "#111";
         var barColorBottom = "#111";
+
+        var labelFontSize = 10;
         if(this.state.ChartData != null){
             //Another way of saying that parent states are initiallized.
             color = this.state.BackGroundColor;
@@ -78,39 +82,72 @@ export default class DOBarChartBar extends Component {
 
             topLabelColor = this.state.StyleData.topLabelColor;
             barColorTop = this.state.StyleData.barColorTop;
-            barColorBottom = this.state.StyleData.barColorBottom;           
+            barColorBottom = this.state.StyleData.barColorBottom;
+            labelFontSize = this.state.StyleData.topLabelFontSize;
             //Lets draw bars...
+
+
         }
 
-        
-
-        var LabelStyle = {
-            width: '100%', 
-            height: this.state.labelHeight,
-            color: topLabelColor,
-            top: 0,
-            textAlign: 'center',
-            fontSize: 10
-        };
         var barContainerHeight = (heightInternal-this.state.labelHeight);
+        let barHeightAnim = barContainerHeight*barHeight;        
+        let barGapHeightAnim = barContainerHeight*(1-barHeight);
+
+        if(this.state.ChartData != null && this.state.ChartData.animateOnStateSet){
+            this.state.barGapHeightAnim = new Animated.Value(barContainerHeight)
+
+            Animated.timing(                    // Animate over time
+                this.state.barHeightAnim,       // The animated value to drive
+                {
+                  toValue: barContainerHeight*barHeight,
+                  duration: 1000,              // Make it take a while
+                }
+              ).start();
+
+            Animated.timing(                    // Animate over time
+                this.state.barGapHeightAnim,       // The animated value to drive
+                {
+                  toValue: barContainerHeight*(1-barHeight),
+                  duration: 1000,              // Make it take a while
+                }
+              ).start();
+
+              barHeightAnim = this.state.barHeightAnim;
+              barGapHeightAnim = this.state.barGapHeightAnim;
+        }
+
+
+        
+        
+        var LabelStyle = {
+            color: topLabelColor,
+            textAlign: 'center',
+            fontSize: labelFontSize,
+        };
         var BarContainerStyle = {
             width: 10, 
-            height: (barContainerHeight*barHeight),
+            height: barHeightAnim,
             top:0,
             backgroundColor:barColorTop
         };
 
         //this render will be overrided...
         return (
-            <View style={{backgroundColor:color, borderColor:"#111", width:widthInternal, height:heightInternal, alignItems: 'center' , justifyContent: 'center' }}>
-                
-                <Text style={LabelStyle}>{topLabel}</Text>
-                <View style={{ width:'100%', height:barContainerHeight*(1-barHeight), bottom:0, backgroundColor:"fff", top:0 }} />
+            <View style={{backgroundColor:color, borderColor:"#111", width:widthInternal, height:heightInternal, alignItems: 'center' , justifyContent: 'center' }} key={"barOuterView"} >
+                <View style={{
+                    width: '100%', 
+                    height: this.state.labelHeight,
+                    top: 0,
+                    justifyContent:'center',
+                    alignItems:'center'
+                    }}
+                    key={"barInnerView"} >
+                    <Text style={LabelStyle} key={"text"} >{topLabel}</Text>
+                </View>
+                <Animated.View style={{ width:'100%',  height:barGapHeightAnim, bottom:0, top:0 }} key={"barAdjust"} />
                 {/*Shift the above View up if you want to attach the percent label just above bar.*/}
                 <TouchableHighlight onPress={this.onBarPress}>
-                <View style={BarContainerStyle}>
-                
-                </View>
+                <Animated.View style={BarContainerStyle}  key={"bar"} />
                 </TouchableHighlight>
            </View>
         );
